@@ -3,18 +3,19 @@ from PIL import Image
 import io
 import base64
 import zipfile
+from pathlib import Path
 
-# Configuración base de Streamlit
+# Configuración base de la página
 st.set_page_config(
     page_title="The Creator",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# === ESTILO GLOBAL ===
+# === ESTILOS ===
 st.markdown("""
     <style>
-    html, body, [class*="css"]  {
+    html, body, [class*="css"] {
         background-color: #000000 !important;
         color: white !important;
         font-family: 'Arial', sans-serif;
@@ -25,7 +26,7 @@ st.markdown("""
     /* HEADER */
     .custom-header {
         background-color: #000000;
-        padding: 2rem 1rem 1.5rem 1rem;
+        padding: 1.5rem 0 1rem 0;
         text-align: center;
         position: fixed;
         top: 0;
@@ -34,15 +35,6 @@ st.markdown("""
         z-index: 999;
         border-bottom: 2px solid #FF4191;
     }
-    .custom-header h1 {
-        color: #FF4191;
-        font-size: 3rem;
-        margin: 0;
-        font-weight: bold;
-        letter-spacing: 2px;
-    }
-
-    /* ESPACIADO debajo del header */
     .spacer { margin-top: 130px; }
 
     /* FOOTER */
@@ -65,7 +57,7 @@ st.markdown("""
         font-weight: bold;
     }
 
-    /* CONTENEDOR DE PREVISUALIZACIÓN */
+    /* PREVISUALIZACIÓN */
     .preview-container {
         display: flex;
         overflow-x: auto;
@@ -91,7 +83,7 @@ st.markdown("""
         margin: 0.5rem 0 0 0;
     }
 
-    /* TEXTO MÁS GRANDE */
+    /* TEXTOS */
     .stSlider > div > div {
         padding: 1rem 0;
     }
@@ -105,11 +97,17 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === HEADER ===
-st.markdown('<div class="custom-header"><h1>THE CREATOR</h1></div>', unsafe_allow_html=True)
+# === HEADER CON LOGO ===
+logo_path = Path("Logo-Thecreator-V4.png")
+st.markdown('<div class="custom-header">', unsafe_allow_html=True)
+if logo_path.exists():
+    st.image(str(logo_path), width=240)
+else:
+    st.markdown('<h1 style="color:#FF4191;">THE CREATOR</h1>', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
 
-# === CONTENIDO ===
+# === INTERFAZ ===
 st.markdown("Convierte hasta **10 imágenes JPEG o PNG** a formato WebP de forma sencilla y visual.")
 
 uploaded_files = st.file_uploader(
