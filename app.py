@@ -3,16 +3,14 @@ from PIL import Image
 import io
 import base64
 import zipfile
-from pathlib import Path
 
-# Configurar la página
+# Configuración de la página
 st.set_page_config(
     page_title="The Creator",
-    layout="wide",
-    initial_sidebar_state="collapsed"
+    layout="wide"
 )
 
-# === ESTILOS GENERALES ===
+# === ESTILOS Y HEADER CON LOGO ===
 st.markdown("""
     <style>
     html, body, [class*="css"] {
@@ -25,14 +23,14 @@ st.markdown("""
 
     .header-container {
         background-color: #000000;
-        padding: 1.5rem 0 1rem 0;
+        padding: 1.2rem;
         text-align: center;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 1000;
         border-bottom: 2px solid #FF4191;
+        z-index: 1000;
     }
     .spacer { margin-top: 130px; }
 
@@ -91,16 +89,12 @@ st.markdown("""
         line-height: 1.6;
     }
     </style>
-
-    <div class="header-container" id="header"></div>
 """, unsafe_allow_html=True)
 
-# === LOGO CENTRADO EN EL HEADER ===
-with st.container():
-    st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.image("Logo-Thecreator-V4.png", width=220)
+# === HEADER CON LOGO CENTRADO ===
+st.markdown('<div class="header-container">', unsafe_allow_html=True)
+st.image("assets/Logo-Thecreator-V4.png", width=220)
+st.markdown('</div><div class="spacer"></div>', unsafe_allow_html=True)
 
 # === INTERFAZ PRINCIPAL ===
 st.markdown("Convierte hasta **10 imágenes JPEG o PNG** a formato WebP de forma sencilla y visual.")
@@ -161,3 +155,4 @@ st.markdown("""
     The Creator Business · <a href="https://www.thecreator.business/" target="_blank">Visita nuestro sitio web</a>
 </div>
 """, unsafe_allow_html=True)
+
