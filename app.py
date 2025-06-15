@@ -3,16 +3,15 @@ from PIL import Image
 import io
 import base64
 import zipfile
-from pathlib import Path
 
-# Configuración base de la página
+# Configuración de la página
 st.set_page_config(
     page_title="The Creator",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# === ESTILOS ===
+# === HEADER CON LOGO CENTRADO ===
 st.markdown("""
     <style>
     html, body, [class*="css"] {
@@ -26,16 +25,20 @@ st.markdown("""
     /* HEADER */
     .custom-header {
         background-color: #000000;
-        padding: 1.5rem 0 1rem 0;
+        padding: 1.2rem 1rem;
         text-align: center;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        z-index: 999;
+        z-index: 1000;
         border-bottom: 2px solid #FF4191;
     }
-    .spacer { margin-top: 130px; }
+    .custom-header img {
+        max-width: 220px;
+        height: auto;
+    }
+    .spacer { margin-top: 120px; }
 
     /* FOOTER */
     .custom-footer {
@@ -48,7 +51,7 @@ st.markdown("""
         text-align: center;
         padding: 1rem;
         font-size: 1rem;
-        z-index: 999;
+        z-index: 1000;
         border-top: 1px solid #FF4191;
     }
     .custom-footer a {
@@ -57,7 +60,7 @@ st.markdown("""
         font-weight: bold;
     }
 
-    /* PREVISUALIZACIÓN */
+    /* PREVIEW SCROLLABLE */
     .preview-container {
         display: flex;
         overflow-x: auto;
@@ -95,19 +98,14 @@ st.markdown("""
         line-height: 1.6;
     }
     </style>
+
+    <div class="custom-header">
+        <img src="Logo-Thecreator-V4.png" alt="The Creator Logo">
+    </div>
+    <div class="spacer"></div>
 """, unsafe_allow_html=True)
 
-# === HEADER CON LOGO ===
-logo_path = Path("Logo-Thecreator-V4.png")
-st.markdown('<div class="custom-header">', unsafe_allow_html=True)
-if logo_path.exists():
-    st.image(str(logo_path), width=240)
-else:
-    st.markdown('<h1 style="color:#FF4191;">THE CREATOR</h1>', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
-st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
-
-# === INTERFAZ ===
+# === INTERFAZ PRINCIPAL ===
 st.markdown("Convierte hasta **10 imágenes JPEG o PNG** a formato WebP de forma sencilla y visual.")
 
 uploaded_files = st.file_uploader(
