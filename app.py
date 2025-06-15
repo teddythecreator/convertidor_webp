@@ -4,16 +4,17 @@ import io
 import base64
 import zipfile
 
-# Configuración de la página
+# Configuración base de Streamlit
 st.set_page_config(
     page_title="The Creator",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
-# === ESTILOS Y HEADER CON LOGO ===
+# === ESTILO GLOBAL ===
 st.markdown("""
     <style>
-    html, body, [class*="css"] {
+    html, body, [class*="css"]  {
         background-color: #000000 !important;
         color: white !important;
         font-family: 'Arial', sans-serif;
@@ -21,19 +22,30 @@ st.markdown("""
     header, footer {visibility: hidden;}
     .main { padding-top: 0rem !important; }
 
-    .header-container {
+    /* HEADER */
+    .custom-header {
         background-color: #000000;
-        padding: 1.2rem;
+        padding: 2rem 1rem 1.5rem 1rem;
         text-align: center;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
+        z-index: 999;
         border-bottom: 2px solid #FF4191;
-        z-index: 1000;
     }
+    .custom-header h1 {
+        color: #FF4191;
+        font-size: 3rem;
+        margin: 0;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    /* ESPACIADO debajo del header */
     .spacer { margin-top: 130px; }
 
+    /* FOOTER */
     .custom-footer {
         position: fixed;
         bottom: 0;
@@ -44,7 +56,7 @@ st.markdown("""
         text-align: center;
         padding: 1rem;
         font-size: 1rem;
-        z-index: 1000;
+        z-index: 999;
         border-top: 1px solid #FF4191;
     }
     .custom-footer a {
@@ -53,6 +65,7 @@ st.markdown("""
         font-weight: bold;
     }
 
+    /* CONTENEDOR DE PREVISUALIZACIÓN */
     .preview-container {
         display: flex;
         overflow-x: auto;
@@ -78,6 +91,7 @@ st.markdown("""
         margin: 0.5rem 0 0 0;
     }
 
+    /* TEXTO MÁS GRANDE */
     .stSlider > div > div {
         padding: 1rem 0;
     }
@@ -91,12 +105,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# === HEADER CON LOGO CENTRADO ===
-st.markdown('<div class="header-container">', unsafe_allow_html=True)
-st.image("assets/Logo-Thecreator-V4.png", width=220)
-st.markdown('</div><div class="spacer"></div>', unsafe_allow_html=True)
+# === HEADER ===
+st.markdown('<div class="custom-header"><h1>THE CREATOR</h1></div>', unsafe_allow_html=True)
+st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
 
-# === INTERFAZ PRINCIPAL ===
+# === CONTENIDO ===
 st.markdown("Convierte hasta **10 imágenes JPEG o PNG** a formato WebP de forma sencilla y visual.")
 
 uploaded_files = st.file_uploader(
@@ -155,4 +168,3 @@ st.markdown("""
     The Creator Business · <a href="https://www.thecreator.business/" target="_blank">Visita nuestro sitio web</a>
 </div>
 """, unsafe_allow_html=True)
-
