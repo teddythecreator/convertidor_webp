@@ -3,15 +3,16 @@ from PIL import Image
 import io
 import base64
 import zipfile
+from pathlib import Path
 
-# Configuración de la página
+# Configurar la página
 st.set_page_config(
     page_title="The Creator",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# === HEADER CON LOGO CENTRADO ===
+# === ESTILOS GENERALES ===
 st.markdown("""
     <style>
     html, body, [class*="css"] {
@@ -22,10 +23,9 @@ st.markdown("""
     header, footer {visibility: hidden;}
     .main { padding-top: 0rem !important; }
 
-    /* HEADER */
-    .custom-header {
+    .header-container {
         background-color: #000000;
-        padding: 1.2rem 1rem;
+        padding: 1.5rem 0 1rem 0;
         text-align: center;
         position: fixed;
         top: 0;
@@ -34,13 +34,8 @@ st.markdown("""
         z-index: 1000;
         border-bottom: 2px solid #FF4191;
     }
-    .custom-header img {
-        max-width: 220px;
-        height: auto;
-    }
-    .spacer { margin-top: 120px; }
+    .spacer { margin-top: 130px; }
 
-    /* FOOTER */
     .custom-footer {
         position: fixed;
         bottom: 0;
@@ -60,7 +55,6 @@ st.markdown("""
         font-weight: bold;
     }
 
-    /* PREVIEW SCROLLABLE */
     .preview-container {
         display: flex;
         overflow-x: auto;
@@ -86,7 +80,6 @@ st.markdown("""
         margin: 0.5rem 0 0 0;
     }
 
-    /* TEXTOS */
     .stSlider > div > div {
         padding: 1rem 0;
     }
@@ -99,11 +92,15 @@ st.markdown("""
     }
     </style>
 
-    <div class="custom-header">
-        <img src="Logo-Thecreator-V4.png" alt="The Creator Logo">
-    </div>
-    <div class="spacer"></div>
+    <div class="header-container" id="header"></div>
 """, unsafe_allow_html=True)
+
+# === LOGO CENTRADO EN EL HEADER ===
+with st.container():
+    st.markdown('<div class="spacer"></div>', unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("Logo-Thecreator-V4.png", width=220)
 
 # === INTERFAZ PRINCIPAL ===
 st.markdown("Convierte hasta **10 imágenes JPEG o PNG** a formato WebP de forma sencilla y visual.")
